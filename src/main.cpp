@@ -14,8 +14,14 @@
 //  操作: Cardputer キーボードの 1 / 2 / 3 キーを押す。
 // =============================================================================
 
-#include <M5Cardputer.h>
+// 注意: include 順が重要。
+//   BleKeyboard.h は KEY_LEFT_CTRL 等を enum で定義する。
+//   M5Cardputer の Keyboard_def.h は同名を #define で定義する。
+//   M5Cardputer を先に include すると、マクロが BleKeyboard の enum を
+//   壊して "expected unqualified-id before numeric constant" になる。
+//   そのため BleKeyboard.h を先に include して enum を確定させる。
 #include <BleKeyboard.h>
+#include <M5Cardputer.h>
 
 // BLE デバイス名 / メーカー名 / 初期バッテリ残量
 BleKeyboard bleKeyboard("Cardputer Approver", "M5Stack", 100);
